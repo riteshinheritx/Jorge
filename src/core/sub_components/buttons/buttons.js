@@ -13,7 +13,7 @@ const MidSizeButton = ({ text }) => {
   return <div classNameName="mid-size-button">{text}</div>;
 };
 
-const Dropdown = ({ title, list, disable }) => {
+const Dropdown = ({ title, list, disable, setShowUploadDialog }) => {
   const [showDropDownList, setShowDropDownList] = useState(false);
   return (
     <div className="w-42">
@@ -45,7 +45,6 @@ const Dropdown = ({ title, list, disable }) => {
           />
         </svg>
       </button>
-
       <div
         id="dropdown"
         className={`z-10 ${
@@ -56,12 +55,18 @@ const Dropdown = ({ title, list, disable }) => {
           className="py-2 text-sm text-gray-700 dark:text-gray-200"
           aria-labelledby="dropdownDefaultButton"
         >
-          <li className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
-            Add Items Field
-          </li>
-          <li className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
-            Update Items Field
-          </li>
+          {list &&
+            list.length > 0 &&
+            list.map((elem) => {
+              return (
+                <li
+                  onClick={() => setShowUploadDialog(true)}
+                  className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                >
+                  {elem}
+                </li>
+              );
+            })}
         </ul>
       </div>
     </div>

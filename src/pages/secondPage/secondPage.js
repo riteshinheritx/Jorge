@@ -1,25 +1,28 @@
-import React from "react";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import React, { useState } from "react";
 import { Dropdown } from "../../core/sub_components/buttons/buttons";
+import Message from "../../core/sub_components/message/message";
+import ImageUpload from "../imageUpload/imageUpload";
 
 function SecondPage() {
+  const [showUploadDialog, setShowUploadDialog] = useState(false);
+
   return (
-    <div className="flex gap-10 flex-col justify-center items-center">
-      Second Page
-      <div className="flex gap-2 flex-wrap  p-4">
-        {/* <button
-          className="flex font-normal w-44 text-lg text-gray-500 items-center w-full p-2 pl-4 pr-4 justify-between  text-2xl font-light cursor-pointer bg-slate-100"
-          onClick={(event) => {
-            // handleButtonClick(event);
-            return;
-          }}
-        >
-          <span className="truncate">Select Folder</span>
-          <KeyboardArrowDownIcon className="cursor-pointer" />
-        </button> */}
-        <Dropdown title="Upload PIM data" />
-        <Dropdown title="Retrieve PIM data" disable={true} /> <Dropdown title="Delete PIM data"  disable={true}  />
-        <Dropdown title="Edit PIM data"  disable={true}  />
+    <div className="flex gap-10 flex-col justify-evenly h-full items-center">
+      <div className="flex gap-2 flex-wrap p-4">
+        <div className="flex gap-2 flex-wrap p-4">
+          <Dropdown
+            setShowUploadDialog={setShowUploadDialog}
+            title="Upload PIM data"
+            list={["Add Items Field", "Update Items Field"]}
+          />
+          <Dropdown title="Retrieve PIM data" disable={true} />
+          <Dropdown title="Delete PIM data" disable={true} />
+          <Dropdown title="Edit PIM data" disable={true} />
+        </div>
+        <div>{showUploadDialog && <div className=""><ImageUpload /></div>}</div>
+      </div>
+      <div>
+        <Message message="second page" />
       </div>
     </div>
   );
