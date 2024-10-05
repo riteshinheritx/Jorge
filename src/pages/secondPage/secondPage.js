@@ -2,9 +2,11 @@ import React, { useState } from "react";
 import { Dropdown } from "../../core/sub_components/buttons/buttons";
 import Message from "../../core/sub_components/message/message";
 import ImageUpload from "../imageUpload/imageUpload";
+import ErrorListing from "../errorListing/errorListing";
 
 function SecondPage() {
   const [showUploadDialog, setShowUploadDialog] = useState(false);
+  const [errors, setErrors] = useState()
 
   return (
     <div className="flex gap-10 flex-col justify-evenly h-full items-center">
@@ -20,15 +22,14 @@ function SecondPage() {
           <Dropdown title="Edit PIM data" disable={true} />
         </div>
         <div>
-          {showUploadDialog && (
+          {showUploadDialog && !errors && (
             <div className="">
-              <ImageUpload />
+              <ImageUpload setErrors={setErrors} />
             </div>
           )}
+
+          {errors && <><ErrorListing errors={errors} /></>}
         </div>
-      </div>
-      <div>
-        <Message message="second page" />
       </div>
     </div>
   );

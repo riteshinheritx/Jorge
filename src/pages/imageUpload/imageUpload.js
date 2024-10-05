@@ -9,6 +9,7 @@ const ImageUpload = ({
   imgFormData,
   setImageUrl,
   imageUrl,
+  setErrors
 }) => {
   const [file, setFile] = useState();
   const onDrop = useCallback((acceptedFiles, rejectedFiles) => {
@@ -34,6 +35,11 @@ const ImageUpload = ({
       };
 
       const res = uploadFile(payload);
+
+      if(res){
+        setErrors(res)
+      }
+      
     } else {
       if (rejectedFiles.length > 0) {
         alert("Only .xlsx files are allowed!");
