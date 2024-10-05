@@ -19,7 +19,13 @@ function SecondPage() {
           <Dropdown title="Delete PIM data" disable={true} />
           <Dropdown title="Edit PIM data" disable={true} />
         </div>
-        <div>{showUploadDialog && <div className=""><ImageUpload /></div>}</div>
+        <div>
+          {showUploadDialog && (
+            <div className="">
+              <ImageUpload />
+            </div>
+          )}
+        </div>
       </div>
       <div>
         <Message message="second page" />

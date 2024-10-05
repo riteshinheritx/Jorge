@@ -13,12 +13,11 @@ const MidSizeButton = ({ text }) => {
   return <div classNameName="mid-size-button">{text}</div>;
 };
 
-const Dropdown = ({ title, list, disable, setShowUploadDialog }) => {
+const Dropdown = ({ title, list, disable = false, setShowUploadDialog }) => {
   const [showDropDownList, setShowDropDownList] = useState(false);
   return (
     <div className="w-42">
       <button
-        disable={disable}
         onClick={() => {
           if (disable) return;
           return setShowDropDownList(!showDropDownList);
@@ -38,9 +37,9 @@ const Dropdown = ({ title, list, disable, setShowUploadDialog }) => {
         >
           <path
             stroke="currentColor"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
             d="m1 1 4 4 4-4"
           />
         </svg>
@@ -60,6 +59,7 @@ const Dropdown = ({ title, list, disable, setShowUploadDialog }) => {
             list.map((elem) => {
               return (
                 <li
+                  key={elem}
                   onClick={() => setShowUploadDialog(true)}
                   className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
                 >

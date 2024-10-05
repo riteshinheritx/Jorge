@@ -4,9 +4,7 @@ import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { loaderFalse, loaderTrue } from "../redux/reducer/loaderReducer";
 
-export const BASE_URL = process.env.BASE_URL || "https://dummyjson.com/";
-export const DATA_API_URL = BASE_URL + "/data/";
-export const IMAGES_API_URL = BASE_URL + "/images/";
+export const BASE_URL = process.env.BASE_URL;
 
 export const TOKEN = getLocalStorageItem("token") || "sampleToken";
 
