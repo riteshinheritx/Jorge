@@ -1,0 +1,23 @@
+.mid-size-button {
+  margin: 2rem;
+  padding: 12.5px 30px;
+  border: 0;
+  border-radius: 100px;
+  background: #13121f;
+  color: #ffffff;
+  font-weight: Bold;
+  transition: all 0.5s;
+  -webkit-transition: all 0.5s;
+}
+
+.mid-size-button:active {
+  transition: all 0.25s;
+  -webkit-transition: all 0.25s;
+  box-shadow: none;
+  transform: scale(0.98);
+}
+
+.mid-size-button:hover {
+  box-shadow: 0 0 20px #6fc5ff50;
+  transform: scale(1.1);
+}

@@ -1,11 +1,14 @@
-import {useEffect, useRef, useState} from "react";
-import "./buttons.css";
+import { useEffect, useRef, useState } from "react";
+import "./buttons.scss";
+
+const MidSizeButton = ({ title, link }) => {
+  return <button className="mid-size-button">{title}</button>;
+};
 
 const Dropdown = ({ title, list, disable = false, onSelect }) => {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef(null);
 
-// Handle click outside of dropdown
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -13,12 +16,10 @@ const Dropdown = ({ title, list, disable = false, onSelect }) => {
       }
     };
 
-    // Add event listener for mousedown/clicks
-    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside);
 
-    // Cleanup the event listener on unmount
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [dropdownRef]);
   return (
@@ -64,8 +65,8 @@ const Dropdown = ({ title, list, disable = false, onSelect }) => {
                 <li
                   key={elem}
                   onClick={() => {
-                    onSelect(true, elem)
-                    setIsOpen(false)
+                    onSelect(true, elem);
+                    setIsOpen(false);
                   }}
                   className="text-left cursor-pointer block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
                 >
@@ -79,4 +80,4 @@ const Dropdown = ({ title, list, disable = false, onSelect }) => {
   );
 };
 
-export { Dropdown };
+export { MidSizeButton, Dropdown };

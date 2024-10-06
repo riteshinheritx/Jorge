@@ -1,5 +1,5 @@
 import React from "react";
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, Navigate } from "react-router-dom";
 import RootLayouts from "../pages/layouts/RootLayouts";
 import LandingPage from "../pages/landingPage";
 import SecondPage from "../pages/secondPage";
@@ -18,6 +18,10 @@ export const router = createBrowserRouter([
         element: <SecondPage />,
       },
     ],
-    errorElement: <></>,
+    errorElement: <>Go To Home</>,
+  },
+  {
+    path: "*",
+    element: <Navigate to="/" /> 
   },
 ]);

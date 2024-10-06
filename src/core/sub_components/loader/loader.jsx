@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import "./loader.css";
+import "./loader.scss";
 
 function Loader() {
   const loading = useSelector((store) => store?.loader?.loader);
