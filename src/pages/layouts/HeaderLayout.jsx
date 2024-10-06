@@ -1,7 +1,4 @@
 const HeaderLayout = () => {
-
-  return <>
-  
-  </>
-}
+  return <></>;
+};
 export default HeaderLayout;

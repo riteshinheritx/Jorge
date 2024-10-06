@@ -1,8 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import Message from "../../core/sub_components/message/message";
-import {SiteLogo} from "../layouts/SvgIcons";
-import {sampleData} from "../../utils/variables";
+import { SiteLogo } from "./layouts/SvgIcons";
+import { sampleData } from "../utils/variables";
 
 function LandingPage() {
   const navigate = useNavigate();

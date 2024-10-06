@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { Dropdown } from "../../core/sub_components/buttons/buttons";
-import ImageUpload from "../imageUpload/imageUpload";
-import ErrorListing from "../errorListing/errorListing";
+import { Dropdown } from "../core/sub_components/buttons/buttons";
+import ImageUpload from "./imageUpload";
+import ErrorListing from "../pages/errorListing"
 
 function SecondPage() {
   const [showUploader, setShowUploader] = useState(false);

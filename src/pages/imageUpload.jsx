@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from "react";
 import { useDropzone } from "react-dropzone";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import CancelIcon from "@mui/icons-material/Cancel";
-import { uploadFile } from "../../services/pim";
+import { uploadFile } from "../services/pim";
 
 const ImageUpload = ({
   setImgFormData,
