@@ -13,6 +13,9 @@ import ProtectedPage from "../pages/protectedPage/protectedPage";
 import { RequireAuth } from "../utils/function";
 import { Request } from "../services/network";
 import MainLayout from "../pages/mainLayout/mainLayout.js";
+import RootLayouts from "../pages/layouts/RootLayouts";
+import DashboardPage from "../pages/dashboard";
+import PimPage from "../pages/pim";
 // ... import other components as needed
 
 const LazyComponent = React.lazy(() =>
@@ -24,9 +27,25 @@ const LazyComponent = React.lazy(() =>
 
 export const router = createBrowserRouter([
   // Sample of normal routes
+
+  {
+    path: "/",
+    element: <RootLayouts/>,
+    children: [
+      {
+        path: "/",
+        element: <DashboardPage/>
+      },
+      {
+        path: "pim",
+        element: <PimPage/>
+      }
+    ]
+  },
+
   {
     // when the URL matches this segment
-    path: "/",
+    path: "/home",
     // it renders this element
     element: (
       <div>
