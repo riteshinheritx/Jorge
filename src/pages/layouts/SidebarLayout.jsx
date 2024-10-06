@@ -13,7 +13,7 @@ const SidebarLayout = () => {
       style={{
         transform: `rotate(${isCollapsed ? 0 : 180}deg)`,
       }}
-      className={"toggle-action absolute flex items-center justify-center -right-3 top-2 bg-white rounded-full shadow-amber-300"}
+      className={"toggle-action absolute flex items-center justify-center -right-3 top-2 rounded-full"}
       onClick={() => setIsCollapsed(!isCollapsed)}
     >
       <AngleLeftIcon size={10}/>

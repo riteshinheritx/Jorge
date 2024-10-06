@@ -1,26 +1,44 @@
-import { useState } from "react";
+import {useEffect, useRef, useState} from "react";
 import "./buttons.css";
 
 const SmallSizeButton = ({ text, title = "title" }) => {
   return (
-    <abbr title={title} classNameName="small-size-button">
+    <abbr title={title} className="small-size-button">
       {text}
     </abbr>
   );
 };
 
 const MidSizeButton = ({ text }) => {
-  return <div classNameName="mid-size-button">{text}</div>;
+  return <div className="mid-size-button">{text}</div>;
 };
 
-const Dropdown = ({ title, list, disable = false, setShowUploadDialog }) => {
-  const [showDropDownList, setShowDropDownList] = useState(false);
+const Dropdown = ({ title, list, disable = false, onSelect }) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const dropdownRef = useRef(null);
+
+// Handle click outside of dropdown
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsOpen(false);
+      }
+    };
+
+    // Add event listener for mousedown/clicks
+    document.addEventListener('mousedown', handleClickOutside);
+
+    // Cleanup the event listener on unmount
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [dropdownRef]);
   return (
-    <div className="w-42">
+    <div className="w-full relative" ref={dropdownRef}>
       <button
         onClick={() => {
           if (disable) return;
-          return setShowDropDownList(!showDropDownList);
+          return setIsOpen(!isOpen);
         }}
         id="dropdownDefaultButton"
         data-dropdown-toggle="dropdown"
@@ -44,24 +62,24 @@ const Dropdown = ({ title, list, disable = false, setShowUploadDialog }) => {
           />
         </svg>
       </button>
+
       <div
-        id="dropdown"
         className={`z-10 ${
-          !showDropDownList && "hidden"
-        } bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700`}
+          !isOpen && "hidden"
+        } absolute mt-2 top-[100%] bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700`}
       >
-        <ul
-          className="py-2 text-sm text-gray-700 dark:text-gray-200"
-          aria-labelledby="dropdownDefaultButton"
-        >
+        <ul className="py-2 text-sm text-gray-700 dark:text-gray-200">
           {list &&
             list.length > 0 &&
             list.map((elem) => {
               return (
                 <li
                   key={elem}
-                  onClick={() => setShowUploadDialog(true)}
-                  className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                  onClick={() => {
+                    onSelect(true, elem)
+                    setIsOpen(false)
+                  }}
+                  className="text-left cursor-pointer block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
                 >
                   {elem}
                 </li>

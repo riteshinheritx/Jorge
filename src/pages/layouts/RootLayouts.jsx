@@ -3,7 +3,6 @@ import PrimaryLayout from "./PrimaryLayout";
 import "./style.scss";
 
 const RootLayouts = () => {
-
   return <div className={"root-layout--wrapper"}>
     <SidebarLayout/>
     <PrimaryLayout/>

@@ -14,9 +14,9 @@ import { RequireAuth } from "../utils/function";
 import { Request } from "../services/network";
 import MainLayout from "../pages/mainLayout/mainLayout.js";
 import RootLayouts from "../pages/layouts/RootLayouts";
-import DashboardPage from "../pages/dashboard";
-import PimPage from "../pages/pim";
-// ... import other components as needed
+import SecondPage from "../pages/secondPage/secondPage";
+import LandingPage from "../pages/landingPage/landingPage";
+
 
 const LazyComponent = React.lazy(() =>
   import("../pages/lazyComponent/lazyComponent")
@@ -34,11 +34,11 @@ export const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <DashboardPage/>
+        element: <LandingPage/>
       },
       {
         path: "pim",
-        element: <PimPage/>
+        element: <SecondPage/>
       }
     ]
   },
