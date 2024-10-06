@@ -12,9 +12,8 @@ export const TOKEN = getLocalStorageItem("token") || "sampleToken";
 export const Request = axios.create({
   baseURL: BASE_URL,
   headers: {
-    "Content-Type": "application/json",
-    // 'Access-Control-Allow-Origin': '*',
-    // "mode": 'no-cors',
+    "Content-Type": "multipart/form-data;",
+    Accept: "*/*",
     token: TOKEN,
   },
 });

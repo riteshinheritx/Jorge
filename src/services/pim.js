@@ -1,9 +1,9 @@
 import { Request } from "./network";
 
-export const uploadFile = async (payload) => {
+export const uploadFile = async (payload, isUpdate) => {
     try {
         const res = await Request({
-            url: `https://t1a-container.azurewebsites.net/api/data/load`,
+            url: `https://t1a-container.azurewebsites.net/api/data/${isUpdate === "add" ? "load" : "update"}`,
             method: "POST",
             data: payload
         });

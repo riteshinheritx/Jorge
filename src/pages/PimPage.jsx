@@ -4,20 +4,21 @@ import ImageUpload from "./ImageUpload";
 import ErrorListing from "../pages/ErrorListing"
 
 function PimPage() {
-  const [showUploader, setShowUploader] = useState(false);
+  const [uploaderType, setUploaderType] = useState(null);
   const [errors, setErrors] = useState()
 
   return (
     <div className="flex gap-10 flex-col h-full">
       <div className="flex gap-2 flex-wrap">
-        <div className="flex gap-2 flex-wrap">
+        <div className="flex gap-4 flex-wrap w-full">
           <div className={"w-42"}>
             <Dropdown
               onSelect={(flag, elm) => {
-                setShowUploader(true)
+                setUploaderType(elm.value)
               }}
-              title="Upload PIM data"
-              list={["Add Items Field", "Update Items Field"]}
+              value={uploaderType}
+              title={!uploaderType ? "Upload PIM data" : (uploaderType === "add" ? "Add Items Field" : "Update Items Field")}
+              list={[{label:"Add Items Field", value: "add"}, {label: "Update Items Field", value: "update"}]}
             />
           </div>
           <div className={"w-42"}>
@@ -32,9 +33,9 @@ function PimPage() {
         </div>
 
         <div className={"w-full my-4"}>
-          {showUploader && !errors && (
+          {uploaderType && !errors && (
             <div className="">
-              <ImageUpload setErrors={setErrors} />
+              <ImageUpload uploaderType={uploaderType} setErrors={setErrors} />
             </div>
           )}
 

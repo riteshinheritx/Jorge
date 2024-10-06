@@ -4,20 +4,24 @@ import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import CancelIcon from "@mui/icons-material/Cancel";
 import { uploadFile } from "../services/pim";
 import { MidSizeButton } from "../core/sub_components/buttons";
+import {toast} from "react-toastify";
 
-const ImageUpload = ({ setErrors }) => {
+const ImageUpload = ({ uploaderType, setErrors }) => {
+  const [inflight, setInflight] = useState(false);
   const [file, setFile] = useState();
-  const [formData, setFormData] = useState();
+  const [formData, setFormData] = useState(null);
 
   const onDrop = (acceptedFiles, rejectedFiles) => {
     if (acceptedFiles.length > 0) {
       const selectedFile = acceptedFiles[0];
-      const formData = new FormData();
-      formData.append("file", selectedFile);
-      setFormData(formData);
+      setFile(selectedFile);
+      const data = new FormData();
+      data.append("input_file", selectedFile);
+      data.append('sheet_name', selectedFile.name);
+      setFormData(data);
     } else {
       if (rejectedFiles.length > 0) {
-        alert("Only .xlsx files are allowed!");
+        toast.error("Only .xlsx files are allowed!");
       }
     }
   };
@@ -31,15 +35,21 @@ const ImageUpload = ({ setErrors }) => {
   const removeFile = (e) => {
     e.stopPropagation();
     setFile(null);
-    setFormData(new FormData());
+    setFormData(null);
   };
 
   const handleUpload = async () => {
-    const payload = {
-      input_file: formData,
-      sheet_name: "Sheet_one",
-    };
-    const res = await uploadFile(payload);
+    if (inflight) {
+      toast.error("Request is already being processed. Please wait for it to complete.")
+      return
+    }
+    if (!formData) {
+      toast.error("File upload required. Please choose a file before continuing.")
+      return
+    }
+    setInflight(true)
+    const res = await uploadFile(formData, uploaderType);
+    setInflight(false)
     if (res) {
       setErrors(res);
     }
@@ -71,12 +81,6 @@ const ImageUpload = ({ setErrors }) => {
         {file && (
           <div className="flex flex-col items-center gap-4 mt-4">
             <div className="flex flex-col items-center justify-center gap-2 text-center">
-              {/* <img
-                src={imageUrl || ""}
-                alt={file.name}
-                className="object-cover w-24 h-24"
-                onLoad={() => URL.revokeObjectURL(imageUrl || "")}
-              /> */}
               <p className="text-sm font-light text-gray-700">{file.name}</p>
               <CancelIcon onClick={(e) => removeFile(e)} />
             </div>

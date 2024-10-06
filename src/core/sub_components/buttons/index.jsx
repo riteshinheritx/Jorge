@@ -5,7 +5,7 @@ const MidSizeButton = ({ title, link }) => {
   return <button className="mid-size-button">{title}</button>;
 };
 
-const Dropdown = ({ title, list, disable = false, onSelect }) => {
+const Dropdown = ({ title, list, value, disable = false, onSelect }) => {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef(null);
 
@@ -58,17 +58,19 @@ const Dropdown = ({ title, list, disable = false, onSelect }) => {
         <ul className="py-2 text-sm text-gray-700 dark:text-gray-200">
           {list &&
             list.length > 0 &&
-            list.map((elem) => {
+            list.map((elem, index) => {
+              const elmTitle = typeof elem === "string" ? elem : elem.label
+              const isSelected = (typeof elem === "string" ? elem : elem.value) === value
               return (
                 <li
-                  key={elem}
+                  key={index}
                   onClick={() => {
                     onSelect(true, elem);
                     setIsOpen(false);
                   }}
-                  className="text-left cursor-pointer block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                  className={`${isSelected && "bg-gray-600"} text-left cursor-pointer block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white`}
                 >
-                  {elem}
+                  {elmTitle}
                 </li>
               );
             })}
