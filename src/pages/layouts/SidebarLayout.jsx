@@ -1,6 +1,5 @@
-import { Link } from "react-router-dom";
 import NavMenu from "./NavMenu";
-import { AngleLeftIcon, SiteLogo } from "./SvgIcons";
+import { AngleLeftIcon } from "./SvgIcons";
 import { useState } from "react";
 import Logo from "../../core/main_components/logo";
 

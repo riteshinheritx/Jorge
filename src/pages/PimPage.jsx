@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { Dropdown } from "../core/sub_components/buttons/buttons";
-import ImageUpload from "./imageUpload";
-import ErrorListing from "../pages/errorListing"
+import { Dropdown } from "../core/sub_components/buttons";
+import ImageUpload from "./ImageUpload";
+import ErrorListing from "../pages/ErrorListing"
 
-function SecondPage() {
+function PimPage() {
   const [showUploader, setShowUploader] = useState(false);
   const [errors, setErrors] = useState()
 
@@ -45,4 +45,4 @@ function SecondPage() {
   );
 }
 
-export default SecondPage;
+export default PimPage;

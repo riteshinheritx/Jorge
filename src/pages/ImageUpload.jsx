@@ -3,7 +3,7 @@ import { useDropzone } from "react-dropzone";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import CancelIcon from "@mui/icons-material/Cancel";
 import { uploadFile } from "../services/pim";
-import { MidSizeButton } from "../core/sub_components/buttons/buttons";
+import { MidSizeButton } from "../core/sub_components/buttons";
 
 const ImageUpload = ({ setErrors }) => {
   const [file, setFile] = useState();

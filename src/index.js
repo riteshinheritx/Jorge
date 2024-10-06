@@ -7,7 +7,7 @@ import { store } from "./redux/store";
 import { Provider } from "react-redux";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Loader from "./core/sub_components/loader/loader";
+import Loader from "./core/sub_components/loader";
 import { AxiosInterceptor } from "./services/network";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
