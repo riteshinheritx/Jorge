@@ -1,12 +1,5 @@
 import React from 'react'
 
-export function customHooks() {
-  return (
-    <div>customHooks</div>
-  )
-}
- 
-
 export const useOnWindowResize = (callback) => {
   const listener = React.useRef(null);
   React.useEffect(() => {

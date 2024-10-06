@@ -1,18 +1,6 @@
 import {useEffect, useRef, useState} from "react";
 import "./buttons.css";
 
-const SmallSizeButton = ({ text, title = "title" }) => {
-  return (
-    <abbr title={title} className="small-size-button">
-      {text}
-    </abbr>
-  );
-};
-
-const MidSizeButton = ({ text }) => {
-  return <div className="mid-size-button">{text}</div>;
-};
-
 const Dropdown = ({ title, list, disable = false, onSelect }) => {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef(null);
@@ -91,4 +79,4 @@ const Dropdown = ({ title, list, disable = false, onSelect }) => {
   );
 };
 
-export { SmallSizeButton, MidSizeButton, Dropdown };
+export { Dropdown };

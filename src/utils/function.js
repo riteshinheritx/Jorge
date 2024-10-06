@@ -29,9 +29,6 @@ export function RequireAuth({ children }) {
   );
 }
 
-export function sampleFunction() {
-  return <div>functionOne</div>;
-}
 
 export function debounce(fn, ms) {
   let timer;
