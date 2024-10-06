@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { Dropdown } from "../core/sub_components/buttons";
 import ImageUpload from "./ImageUpload";
-import ErrorListing from "../pages/ErrorListing"
+import ErrorListing from "../pages/ErrorListing";
 import Message from "../core/main_components/message";
 
 function PimPage() {
   const [uploaderType, setUploaderType] = useState(null);
-  const [errors, setErrors] = useState()
+  const [errors, setErrors] = useState();
 
   return (
     <div className="flex gap-10 flex-col h-full">
@@ -15,11 +15,20 @@ function PimPage() {
           <div className={"w-42"}>
             <Dropdown
               onSelect={(flag, elm) => {
-                setUploaderType(elm.value)
+                setUploaderType(elm.value);
               }}
               value={uploaderType}
-              title={!uploaderType ? "Upload PIM data" : (uploaderType === "add" ? "Add Items Field" : "Update Items Field")}
-              list={[{label:"Add Items Field", value: "add"}, {label: "Update Items Field", value: "update"}]}
+              title={
+                !uploaderType
+                  ? "Upload PIM data"
+                  : uploaderType === "add"
+                  ? "Add Items Field"
+                  : "Update Items Field"
+              }
+              list={[
+                { label: "Add Items Field", value: "add" },
+                { label: "Update Items Field", value: "update" },
+              ]}
             />
           </div>
           <div className={"w-42"}>
@@ -40,13 +49,26 @@ function PimPage() {
             </div>
           )}
 
-          {errors && <><ErrorListing errors={errors} /></>}
+          {errors && (
+            <>
+              <ErrorListing errors={errors} />
+            </>
+          )}
         </div>
       </div>
 
-      {!errors && uploaderType && <Message className={"mt-auto"}>
-        <p>Select the TASK you want to execute. After selecting, please select a file to <span className={"uppercase"}>{uploaderType}</span>.</p>
-      </Message>}
+      {!errors && uploaderType ? (
+        <Message className={"mt-auto"}>
+          <p>
+            Select the TASK you want to execute. After selecting, please select
+            a file to <span className={"uppercase"}>{uploaderType}</span>.
+          </p>
+        </Message>
+      ) : (
+        <Message className={"mt-auto"}>
+          Select the ACTION you want to execute
+        </Message>
+      )}
     </div>
   );
 }

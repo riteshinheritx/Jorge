@@ -4,7 +4,7 @@ import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import CancelIcon from "@mui/icons-material/Cancel";
 import { uploadFile } from "../services/pim";
 import { MidSizeButton } from "../core/sub_components/buttons";
-import {toast} from "react-toastify";
+import { toast } from "react-toastify";
 
 const ImageUpload = ({ uploaderType, setErrors }) => {
   const [inflight, setInflight] = useState(false);
@@ -17,7 +17,7 @@ const ImageUpload = ({ uploaderType, setErrors }) => {
       setFile(selectedFile);
       const data = new FormData();
       data.append("input_file", selectedFile);
-      data.append('sheet_name', selectedFile.name);
+      data.append("sheet_name", selectedFile.name);
       setFormData(data);
     } else {
       if (rejectedFiles.length > 0) {
@@ -40,18 +40,26 @@ const ImageUpload = ({ uploaderType, setErrors }) => {
 
   const handleUpload = async () => {
     if (inflight) {
-      toast.error("Request is already being processed. Please wait for it to complete.")
-      return
+      toast.error(
+        "Request is already being processed. Please wait for it to complete."
+      );
+      return;
     }
     if (!formData) {
-      toast.error("File upload required. Please choose a file before continuing.")
-      return
+      toast.error(
+        "File upload required. Please choose a file before continuing."
+      );
+      return;
     }
-    setInflight(true)
+    setInflight(true);
     const res = await uploadFile(formData, uploaderType);
-    setInflight(false)
-    if (res) {
-      setErrors(res);
+    setInflight(false);
+    if (res.error.includes("Invalid file type")) {
+      toast.error(res.error);
+      return;
+    }
+    if (res.status === 200) {
+      setErrors(res.payload);
     }
   };
 
@@ -87,9 +95,11 @@ const ImageUpload = ({ uploaderType, setErrors }) => {
           </div>
         )}
       </div>
-      {formData && <div onClick={handleUpload}>
-        <MidSizeButton title="Upload" />
-      </div>}
+      {formData && (
+        <div onClick={handleUpload}>
+          <MidSizeButton title="Upload" />
+        </div>
+      )}
     </div>
   );
 };
