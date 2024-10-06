@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Dropdown } from "../core/sub_components/buttons";
 import ImageUpload from "./ImageUpload";
 import ErrorListing from "../pages/ErrorListing"
+import Message from "../core/main_components/message";
 
 function PimPage() {
   const [uploaderType, setUploaderType] = useState(null);
@@ -42,6 +43,10 @@ function PimPage() {
           {errors && <><ErrorListing errors={errors} /></>}
         </div>
       </div>
+
+      {!errors && uploaderType && <Message className={"mt-auto"}>
+        <p>Select the TASK you want to execute. After selecting, please select a file to <span className={"uppercase"}>{uploaderType}</span>.</p>
+      </Message>}
     </div>
   );
 }

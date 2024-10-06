@@ -87,9 +87,9 @@ const ImageUpload = ({ uploaderType, setErrors }) => {
           </div>
         )}
       </div>
-      <div onClick={handleUpload}>
+      {formData && <div onClick={handleUpload}>
         <MidSizeButton title="Upload" />
-      </div>
+      </div>}
     </div>
   );
 };
