@@ -5,6 +5,9 @@ import CancelIcon from "@mui/icons-material/Cancel";
 import { uploadFile } from "../services/pim";
 import { MidSizeButton } from "../core/sub_components/buttons";
 import { toast } from "react-toastify";
+import * as XLSX from 'xlsx';
+
+
 
 const ImageUpload = ({ uploaderType, setErrors }) => {
   const [inflight, setInflight] = useState(false);
@@ -14,11 +17,28 @@ const ImageUpload = ({ uploaderType, setErrors }) => {
   const onDrop = (acceptedFiles, rejectedFiles) => {
     if (acceptedFiles.length > 0) {
       const selectedFile = acceptedFiles[0];
-      setFile(selectedFile);
-      const data = new FormData();
-      data.append("input_file", selectedFile);
-      data.append("sheet_name", selectedFile.name);
-      setFormData(data);
+      if (selectedFile) {
+        setFile(selectedFile);
+        const newFormData = new FormData();
+        newFormData.append("input_file", selectedFile);
+
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          const data = new Uint8Array(e.target.result);
+          const workbook = XLSX.read(data, { type: 'array' });
+          const names = workbook.SheetNames;
+          console.log("SheetNames--->", names)
+          if (names.length > 0) {
+            newFormData.append("sheet_name", names[0]);
+          } else {
+            toast.error("Failed to retrieve sheet names. Please check the file and try again")
+            return
+          }
+          setFormData(newFormData);
+        };
+        reader.readAsArrayBuffer(selectedFile);
+      }
+
     } else {
       if (rejectedFiles.length > 0) {
         toast.error("Only .xlsx files are allowed!");
@@ -51,15 +71,21 @@ const ImageUpload = ({ uploaderType, setErrors }) => {
       );
       return;
     }
+
     setInflight(true);
     const res = await uploadFile(formData, uploaderType);
     setInflight(false);
-    if (res.error.includes("Invalid file type")) {
-      toast.error(res.error);
-      return;
-    }
-    if (res.status === 200) {
-      setErrors(res.payload);
+
+    if (res) {
+      if (res.error && (res.error || "").includes("Invalid file type")) {
+        toast.error(res.error);
+        return;
+      }
+      if (res.status === 200) {
+        setErrors(res.payload);
+      }
+    } else {
+      toast.error("File upload failed during the API request. Please try again.");
     }
   };
 
