@@ -7,8 +7,6 @@ import { MidSizeButton } from "../core/sub_components/buttons";
 import { toast } from "react-toastify";
 import * as XLSX from 'xlsx';
 
-
-
 const ImageUpload = ({ uploaderType, setErrors }) => {
   const [inflight, setInflight] = useState(false);
   const [file, setFile] = useState();
@@ -77,13 +75,8 @@ const ImageUpload = ({ uploaderType, setErrors }) => {
     setInflight(false);
 
     if (res) {
-      if (res.error && (res.error || "").includes("Invalid file type")) {
-        toast.error(res.error);
-        return;
-      }
-      if (res.status === 200) {
+      // console.log(typeof res, "first",res, res["payload"], res.payload)
         setErrors(res.payload);
-      }
     } else {
       toast.error("File upload failed during the API request. Please try again.");
     }

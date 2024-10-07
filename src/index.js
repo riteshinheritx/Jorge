@@ -8,18 +8,18 @@ import { Provider } from "react-redux";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Loader from "./core/sub_components/loader";
-import { AxiosInterceptor } from "./services/network";
+// import { AxiosInterceptor } from "./services/network";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <Provider store={store}>
       <React.Fragment>
-        <AxiosInterceptor>
+        {/* <AxiosInterceptor> */}
           <ToastContainer />
           <Loader />
           <App />
-        </AxiosInterceptor>
+        {/* </AxiosInterceptor> */}
       </React.Fragment>
     </Provider>
   </React.StrictMode>
