@@ -2,7 +2,7 @@ import React from "react";
 
 function ErrorListing({ errors }) {
 
-  const errorRows = errors && errors.length > 0 && errors.filter((elem) => typeof elem !== "string" && elem.status === "error")
+  const errorRows = errors && errors.length > 0 && errors.filter((elem) => typeof elem !== "string" && elem?.status === "error")
 
   return (
     <div>
@@ -31,7 +31,7 @@ function ErrorListing({ errors }) {
                           <td className="px-6 py-4">
                             {elem.sku === null ? "Nan" : elem.sku}
                           </td>
-                          <td className="px-6 py-4 uppercase">{elem.status}</td>
+                          <td className="px-6 py-4 uppercase">{elem?.status}</td>
                         </tr>
                       );
                     })}
