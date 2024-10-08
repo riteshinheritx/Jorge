@@ -1,5 +1,4 @@
 import axios from "axios";
-import { getLocalStorageItem } from "./storage";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { loaderFalse, loaderTrue } from "../redux/reducer/loaderReducer";
