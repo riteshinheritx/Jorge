@@ -1,10 +1,15 @@
 import React from "react";
 
 function ErrorListing({ errors }) {
+
+  const errorRows = errors && errors.length > 0 && errors.filter((elem) => typeof elem !== "string" && elem.status === "error")
+
   return (
     <div>
-      {errors && errors.length === 0 ? (
-        <>NO ERRORS FOUND</>
+      {errorRows.length === 0 ? (
+        <div className={"my-4 text-lg border-b text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 px-6 py-3"}>
+          <p>NO ERRORS FOUND</p>
+        </div>
       ) : (
         <>
           <h2 className="my-4 text-lg border-b text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 px-6 py-3">
@@ -13,11 +18,7 @@ function ErrorListing({ errors }) {
           <div className="relative overflow-x-auto h-80">
             <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
               <tbody>
-                {errors &&
-                  errors.length > 0 &&
-                  errors
-                    .filter((elem) => elem.status === "error")
-                    .map((elem, index) => {
+                {errorRows.length > 0 && errorRows.map((elem, index) => {
                       return (
                         <tr
                           key={index}

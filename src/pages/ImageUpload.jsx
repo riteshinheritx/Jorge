@@ -74,13 +74,35 @@ const ImageUpload = ({ uploaderType, setErrors }) => {
     const res = await uploadFile(formData, uploaderType);
     setInflight(false);
 
-    if (res) {
-      setErrors(res.payload);
-    } else {
-      toast.error(
-        "File upload failed during the API request. Please try again."
-      );
+
+    if (res.status === 200) {
+      let result = res.data
+      if (typeof res.data === "string") {
+        try {
+          const data = res.data.replace(/\bNaN\b/g, 'null')
+          result = JSON.parse(data)
+        } catch (e) {
+          result = null
+        }
+      }
+
+      if (result) {
+        if (result.message) {
+          toast.info(result.message);
+        }
+        if (result.payload) {
+          setErrors(result.payload);
+        }
+
+        setFile(null);
+        setFormData(null);
+      }
+      return
     }
+
+    toast.error(
+      "File upload failed during the API request. Please try again."
+    );
   };
 
   useEffect(() => {
