@@ -75,7 +75,7 @@ const ImageUpload = ({ uploaderType, setErrors }) => {
     setInflight(false);
 
 
-    if (res?.status === 200) {
+    if (res && res?.status === 200) {
       let result = res.data
       if (typeof res.data === "string") {
         try {
