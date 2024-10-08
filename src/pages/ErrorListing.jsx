@@ -24,8 +24,12 @@ function ErrorListing({ errors }) {
                           className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
                         >
                           <td className="px-6 py-4">{index + 1}</td>
-                          <td className="px-6 py-4 uppercase">{Object.keys(elem)[1]}</td>
-                          <td className="px-6 py-4">{elem.sku.toString()}</td>
+                          <td className="px-6 py-4 uppercase">
+                            {Object.keys(elem)[1]}
+                          </td>
+                          <td className="px-6 py-4">
+                            {elem.sku === null ? "Nan" : elem.sku}
+                          </td>
                           <td className="px-6 py-4 uppercase">{elem.status}</td>
                         </tr>
                       );

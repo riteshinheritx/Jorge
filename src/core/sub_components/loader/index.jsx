@@ -8,7 +8,7 @@ function Loader() {
   return (
     <>
       {loading && (
-        <div className="loader">
+        <div className="loader z-50">
           <div className="lds-spinner">
             <div></div>
             <div></div>

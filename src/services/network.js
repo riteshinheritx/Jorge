@@ -15,16 +15,16 @@ export const Request = axios.create({
   },
 });
 
-Request.interceptors.response.use( (response) => {
-  return response.json()
-}, (error) => {
-  if (!error.response) {
-      return Promise.reject('Network Error')
-  } else {
-      return error.response
-  }
+// Request.interceptors.response.use( (response) => {
+//   return response.json()
+// }, (error) => {
+//   if (!error.response) {
+//       return Promise.reject('Network Error')
+//   } else {
+//       return error.response
+//   }
 
-});
+// });
 
 export const AxiosInterceptor = ({ children }) => {
   const dispatch = useDispatch();

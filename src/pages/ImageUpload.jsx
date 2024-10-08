@@ -5,7 +5,7 @@ import CancelIcon from "@mui/icons-material/Cancel";
 import { uploadFile } from "../services/pim";
 import { MidSizeButton } from "../core/sub_components/buttons";
 import { toast } from "react-toastify";
-import * as XLSX from 'xlsx';
+import * as XLSX from "xlsx";
 
 const ImageUpload = ({ uploaderType, setErrors }) => {
   const [inflight, setInflight] = useState(false);
@@ -23,20 +23,20 @@ const ImageUpload = ({ uploaderType, setErrors }) => {
         const reader = new FileReader();
         reader.onload = (e) => {
           const data = new Uint8Array(e.target.result);
-          const workbook = XLSX.read(data, { type: 'array' });
+          const workbook = XLSX.read(data, { type: "array" });
           const names = workbook.SheetNames;
-          console.log("SheetNames--->", names)
           if (names.length > 0) {
             newFormData.append("sheet_name", names[0]);
           } else {
-            toast.error("Failed to retrieve sheet names. Please check the file and try again")
-            return
+            toast.error(
+              "Failed to retrieve sheet names. Please check the file and try again"
+            );
+            return;
           }
           setFormData(newFormData);
         };
         reader.readAsArrayBuffer(selectedFile);
       }
-
     } else {
       if (rejectedFiles.length > 0) {
         toast.error("Only .xlsx files are allowed!");
@@ -75,10 +75,11 @@ const ImageUpload = ({ uploaderType, setErrors }) => {
     setInflight(false);
 
     if (res) {
-      // console.log(typeof res, "first",res, res["payload"], res.payload)
-        setErrors(res.payload);
+      setErrors(res.payload);
     } else {
-      toast.error("File upload failed during the API request. Please try again.");
+      toast.error(
+        "File upload failed during the API request. Please try again."
+      );
     }
   };
 

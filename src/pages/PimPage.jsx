@@ -16,6 +16,7 @@ function PimPage() {
             <Dropdown
               onSelect={(flag, elm) => {
                 setUploaderType(elm.value);
+                setErrors()
               }}
               value={uploaderType}
               title={
